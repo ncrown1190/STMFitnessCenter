@@ -10,16 +10,16 @@ namespace STMFitnessCenter
     {
         public Club AssignedClub { get; set; }
 
-        public SingleClubMember(int id, string name, Club club): base(id, name)
+        public SingleClubMember(string name, Club assignedClub): base(name)
         {
-            AssignedClub = club;
+            AssignedClub = assignedClub;
         }
 
         public override void CheckIn(Club club)
         {
-            if (club != AssignedClub)
+            if (club.Name != AssignedClub.Name)
             {
-                Console.WriteLine("This is not your club!");
+                throw new Exception($"Cannot check in. {Name} is assigned to {AssignedClub.Name}");
             } else
             {
                 Console.WriteLine($"{Name} checked into {club.Name}");

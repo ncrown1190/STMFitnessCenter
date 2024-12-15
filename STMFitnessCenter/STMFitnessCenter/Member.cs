@@ -2,16 +2,15 @@
 {
     public abstract class Member
     {
-        public int Id { get; set; }
+        private static int nextId = 1;
+        public int Id { get; private set; }
         public string Name { get; set; }
 
-        public Member(int id, string name)
+        public Member(string name)
         {
-            Id = id;
+            Id = nextId++;
             Name = name;
         }
         public abstract void CheckIn(Club club);
-
-
     }
 }

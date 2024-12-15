@@ -9,7 +9,7 @@ namespace STMFitnessCenter
     public class MultiClubMember : Member
     {
         public int MembershipPoints { get; set; }
-        public MultiClubMember(int id, string name): base(id, name) 
+        public MultiClubMember(string name): base(name) 
         {
             MembershipPoints = 0;
         }
@@ -17,6 +17,7 @@ namespace STMFitnessCenter
         public override void CheckIn(Club club)
         {
             MembershipPoints += 10;
+            Console.WriteLine($"\nMultiClub Member {Name} is Checked in at {club.Name}. Point: {MembershipPoints}");
         }
     }
 }
