@@ -187,7 +187,23 @@ public static void GenerateBill(List<Member> members, int id)
                         Console.WriteLine($"Total fee with 20% discount: ${150 * 0.8}");
                     }
                 }
-
+                else
+                {
+                    if(member is MultiClubMember multiClubMember)
+                    {
+                        Console.WriteLine($"Membership Points: {multiClubMember.MembershipPoints}");
+                        Console.WriteLine($"Standard Multi Club Member fee is ${100}");
+                        Console.WriteLine($"Total Fee: ${multiClubMember.MembershipPoints * 0.5 + 100}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Standard Single Club Member fee is: ${150}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Member not found.");
             }
         }
     }
