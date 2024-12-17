@@ -37,7 +37,7 @@ while (true)
                 User.DisplayMembers(members);
                 break;
             case 4:
-                //User.CheckInMember(members, clubList, id);
+                User.CheckInMember(members, clubList, id);
                 break;
             case 5:
                 //User.GenerateBill(members, id);

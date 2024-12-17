@@ -105,5 +105,41 @@ namespace STMFitnessCenter
             }
             Console.WriteLine("No active members available.");
         }
+
+        //Check members in 
+
+        public static void CheckInMember(List<Member> members, List<Club> clubs, int id)
+        {
+            Console.Write("Enter Member ID to check in: ");
+            int idToCheckIn = int.Parse(Console.ReadLine());
+
+            var member = members.FirstOrDefault(m => m.Id == idToCheckIn);
+            if (member != null)
+            {
+                Console.WriteLine("Select a club: ");
+                for (int i = 0; i < clubList.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}.  {clubList[i]}");
+                }
+                Console.Write("Enter club number: ");
+                int clubNumber = int.Parse(Console.ReadLine());
+                Club selectedClub = clubList[clubNumber - 1];
+
+                try
+                {
+                    member.CheckIn(selectedClub);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($" An error occured. {ex.Message}");
+
+                } 
+
+            }
+            else
+            {
+                Console.WriteLine("Member not found!");
+            }
+        }
     }
 }
