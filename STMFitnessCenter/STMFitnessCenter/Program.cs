@@ -8,6 +8,10 @@ Console.ForegroundColor = ConsoleColor.Yellow;
 Console.WriteLine("\t\t\t\tWELCOME TO STM FITNESS CENTER.");
 Console.WriteLine();
 
+Console.ForegroundColor = ConsoleColor.Cyan;
+Console.WriteLine("Starting from Today till end of December.");
+Console.WriteLine("We offer 20% discount for limited time, available for new members only.");
+
 List<Member> members = new List<Member>();
 List<Club> clubList = new List<Club>();
 
@@ -40,7 +44,7 @@ while (true)
                 User.CheckInMember(members, clubList, id);
                 break;
             case 5:
-                //User.GenerateBill(members, id);
+                User.GenerateBill(members, id);
                 break;
             case 6:
                 Console.WriteLine("Thank you for using the Fitness Center App!");
