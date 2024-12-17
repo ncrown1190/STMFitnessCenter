@@ -17,7 +17,7 @@ namespace STMFitnessCenter
         public override void CheckIn(Club club)
         {
             MembershipPoints += 10;
-            Console.WriteLine($"\nMultiClub Member {Name} is Checked in at {club.Name}. Point: {MembershipPoints}");
+            Console.WriteLine($"\nMultiClub Member {Name} is Checked in at {club.Name}. Points: {MembershipPoints}");
         }
     }
 }

@@ -30,6 +30,13 @@ namespace STMFitnessCenter
         // ADD MEMBER
         public static void AddMember(List<Member> members, List<Club> clubs)
         {
+            DateTime now = DateTime.Now;
+            double discount = 0.0; // Apply discounts based on the current date
+            if (now.Month == 12) // Example: Apply discounts in December
+            {
+                discount = 0.2; // 20% discount
+            }
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\n1. Single Club Member\n2. Multi-Club Member");
             Console.WriteLine();
@@ -58,11 +65,24 @@ namespace STMFitnessCenter
                 int clubNumber = int.Parse(Console.ReadLine());
                 Club assignedClub = clubList[clubNumber - 1];
 
-                members.Add(new SingleClubMember(name, assignedClub));
+                Member newMember = null;
+                newMember = new SingleClubMember(name, assignedClub);
+                newMember.Discount = discount;
+                members.Add(newMember);
+
+                Console.WriteLine($"Single Club Member added with a {discount * 100}% discount.");
+
+                //members.Add(new SingleClubMember(name, assignedClub));
             }
             else if (type == 2)
             {
-                members.Add(new MultiClubMember(name));
+                Member newMember = null;
+                newMember = new MultiClubMember(name);
+                newMember.Discount = discount;
+                members.Add(newMember);
+                //members.Add(new MultiClubMember(name));
+
+                Console.WriteLine($"Multi club Member added with a {discount * 100}% discount");
             }
             else
             {
@@ -103,7 +123,10 @@ namespace STMFitnessCenter
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("No active members available.");
+            else
+            {
+                Console.WriteLine("No active members available.");
+            }            
         }
 
         //Check members in 
@@ -134,11 +157,37 @@ namespace STMFitnessCenter
                     Console.WriteLine($" An error occured. {ex.Message}");
 
                 } 
-
             }
             else
             {
                 Console.WriteLine("Member not found!");
+            }
+        }
+
+public static void GenerateBill(List<Member> members, int id)
+        {
+            Console.Write("Enter Member ID to generate bill: ");
+            int idToGenerateBill = int.Parse(Console.ReadLine());
+
+            var member = members.FirstOrDefault(m => m.Id == idToGenerateBill);
+            if(member != null)
+            {
+                Console.WriteLine($"Bill for {member.Name}: ");
+                if(DateTime.Now.Month == 12)
+                {
+                    if(member is MultiClubMember multiClubMember)
+                    {
+                        Console.WriteLine($"Membership Points: {multiClubMember.MembershipPoints}");
+                        Console.WriteLine($"Standard Multi Club Member fee is ${100}");
+                        Console.WriteLine($"Total Fee: ${multiClubMember.MembershipPoints * 0.5 + (100) * 0.8}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Standard Single Club Member fee is ${150}");
+                        Console.WriteLine($"Total fee with 20% discount: ${150 * 0.8}");
+                    }
+                }
+
             }
         }
     }

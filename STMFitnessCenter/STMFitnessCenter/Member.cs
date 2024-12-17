@@ -5,6 +5,7 @@
         private static int nextId = 1;
         public int Id { get; private set; }
         public string Name { get; set; }
+        public double Discount { get; set; }
 
         public Member(string name)
         {
