@@ -56,6 +56,7 @@ while (true)
             case 6:
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Thank you for using the Fitness Center App!");
+                Console.WriteLine();
                 Console.ForegroundColor= ConsoleColor.White;
                 return;
         }

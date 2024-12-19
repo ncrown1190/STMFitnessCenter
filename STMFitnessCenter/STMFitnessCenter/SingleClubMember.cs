@@ -19,10 +19,13 @@ namespace STMFitnessCenter
         {
             if (club.Name != AssignedClub.Name)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 throw new Exception($"Cannot check in. {Name} is assigned to {AssignedClub.Name}");
             } else
             {
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine($"{Name} checked into {club.Name}");
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
         }
