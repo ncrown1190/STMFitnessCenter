@@ -19,5 +19,9 @@ namespace STMFitnessCenter
             MembershipPoints += 10;
             Console.WriteLine($"\nMultiClub Member {Name} is Checked in at {club.Name}. Points: {MembershipPoints}");
         }
+        public int GetPoints()
+        {
+            return MembershipPoints;
+        }
     }
 }
