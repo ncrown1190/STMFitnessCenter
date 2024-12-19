@@ -46,7 +46,7 @@ namespace STMFitnessCenter
 
             /* Console.Write("Enter Member ID: ");
             int id = int.Parse(Console.ReadLine()); */
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.Write("Enter Member Name: ");
             string name = Console.ReadLine();
             Console.ForegroundColor = ConsoleColor.White;
@@ -71,7 +71,8 @@ namespace STMFitnessCenter
                 members.Add(newMember);
 
                 Console.WriteLine($"Single Club Member added with a {discount * 100}% discount.");
-
+                Console.ReadKey();
+                Console.Clear();
                 //members.Add(new SingleClubMember(name, assignedClub));
             }
             else if (type == 2)
@@ -83,16 +84,23 @@ namespace STMFitnessCenter
                 //members.Add(new MultiClubMember(name));
 
                 Console.WriteLine($"Multi club Member added with a {discount * 100}% discount");
+                Console.ReadKey();
+                Console.Clear();
             }
             else
             {
-                Console.WriteLine("\tInvalid member type.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine();
+                Console.WriteLine("Invalid member type. Try again");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 
         //REMOVE MEMBER
         public static void RemoveMember(List<Member> members, int id)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("Enter Member ID to remove: ");
             int id1 = int.Parse(Console.ReadLine());
 
@@ -101,32 +109,46 @@ namespace STMFitnessCenter
             if (member != null)
             {
                 members.Remove(member);
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Member removed successfully.");
+                Console.ReadKey();
+                Console.Clear();
             }
             else
             {
                 Console.WriteLine("Member not found.");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 
         //Display Members
         public static void DisplayMembers(List<Member> members)
         {
-            if (members.Count != 0)
+            int memberIdToDisplay = AccessMemberId.ChooseMember(members);
+            if (!(memberIdToDisplay == 0)) // if 0 returned from ChooseMember, user wants to exit to main menu.
             {
-                Console.WriteLine("Members List: ");
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                foreach (Member member in members)
+                Member member = members.Where(x => x.Id == memberIdToDisplay).First();
+                if (member.GetType() == typeof(SingleClubMember))
                 {
-                    Console.WriteLine($"Member ID: {member.Id} Member Name: {member.Name}");
+                    SingleClubMember member2 = member as SingleClubMember;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    //Console.WriteLine($"\nId:{member.Id}  Name:{member.Name}  Club#:{member2.GetAssignedClubId()} {member2.AssignedClub.ToString()}");
+                    Console.WriteLine($"\nId:{member.Id}  Name:{member.Name}  Club: {member2.AssignedClub.ToString()}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ReadKey();
+                    Console.Clear();
                 }
-                Console.WriteLine();
+                else
+                {
+                    MultiClubMember member3 = member as MultiClubMember;
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine($"\nId:{member.Id}  Name:{member.Name}  Points:{member3.GetPoints()}");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ReadKey();
+                    Console.Clear();
+                }
             }
-            else
-            {
-                Console.WriteLine("No active members available.");
-            }            
         }
 
         //Check members in 
@@ -140,10 +162,13 @@ namespace STMFitnessCenter
             if (member != null)
             {
                 Console.WriteLine("Select a club: ");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+
                 for (int i = 0; i < clubList.Count; i++)
                 {
                     Console.WriteLine($"{i + 1}.  {clubList[i]}");
                 }
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Enter club number: ");
                 int clubNumber = int.Parse(Console.ReadLine());
                 Club selectedClub = clubList[clubNumber - 1];
@@ -156,11 +181,15 @@ namespace STMFitnessCenter
                 {
                     Console.WriteLine($" An error occured. {ex.Message}");
 
-                } 
+                }
+                Console.ReadKey();
+                Console.Clear();
             }
             else
             {
                 Console.WriteLine("Member not found!");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 
@@ -200,10 +229,14 @@ public static void GenerateBill(List<Member> members, int id)
                         Console.WriteLine($"Standard Single Club Member fee is: ${150}");
                     }
                 }
+                Console.ReadKey();
+                Console.Clear();
             }
             else
             {
                 Console.WriteLine("Member not found.");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
     }
