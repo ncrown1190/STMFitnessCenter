@@ -196,12 +196,14 @@ namespace STMFitnessCenter
 public static void GenerateBill(List<Member> members, int id)
         {
             Console.Write("Enter Member ID to generate bill: ");
+            
             int idToGenerateBill = int.Parse(Console.ReadLine());
 
             var member = members.FirstOrDefault(m => m.Id == idToGenerateBill);
             if(member != null)
             {
                 Console.WriteLine($"Bill for {member.Name}: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 if(DateTime.Now.Month == 12)
                 {
                     if(member is MultiClubMember multiClubMember)
@@ -228,6 +230,7 @@ public static void GenerateBill(List<Member> members, int id)
                     {
                         Console.WriteLine($"Standard Single Club Member fee is: ${150}");
                     }
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 Console.ReadKey();
                 Console.Clear();
