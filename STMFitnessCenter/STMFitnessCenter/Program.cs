@@ -4,13 +4,6 @@ using STMFitnessCenter;
 using System.Collections.Generic;
 using static System.Reflection.Metadata.BlobBuilder;
 
-//Console.ForegroundColor = ConsoleColor.Yellow;
-//Console.WriteLine("\t\t\t\tWELCOME TO STM FITNESS CENTER.");
-//Console.WriteLine();
-
-//Console.ForegroundColor = ConsoleColor.Cyan;
-//Console.WriteLine("Starting from Today till end of December.");
-//Console.WriteLine("We offer 20% discount for limited time, available for new members only.");
 
 List<Member> members = new List<Member>();
 List<Club> clubList = new List<Club>();
@@ -58,11 +51,14 @@ while (true)
                 Console.WriteLine("Thank you for using the Fitness Center App!");
                 Console.WriteLine();
                 Console.ForegroundColor= ConsoleColor.White;
+                Console.ReadKey();
                 return;
         }
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"An error occurred: {ex.Message}");
-    }
+        Console.WriteLine($"An error occurred: {ex.Message}");       
+    }   
 }
+
+
