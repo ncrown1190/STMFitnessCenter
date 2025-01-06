@@ -143,7 +143,7 @@ namespace STMFitnessCenter
                 {
                     MultiClubMember member3 = member as MultiClubMember;
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"\nId:{member.Id}  Name:{member.Name}  Points:{member3.GetPoints()}");
+                    Console.WriteLine($"\nId:{member.Id}  Name:{member.Name}, Multi Club Member with Points:{member3.GetPoints()}");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.ReadKey();
                     Console.Clear();
@@ -203,6 +203,7 @@ public static void GenerateBill(List<Member> members, int id)
             if(member != null)
             {
                 Console.WriteLine($"Bill for {member.Name}: ");
+                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 if(DateTime.Now.Month == 12)
                 {
